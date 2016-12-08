@@ -1,6 +1,12 @@
 package com.pascalhow.screenGrab;
 
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
+import com.gargoylesoftware.htmlunit.html.HtmlDivision;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.pascalhow.constants.Constants;
 import com.pascalhow.models.Course;
 import org.jsoup.Jsoup;
@@ -13,13 +19,12 @@ import org.jsoup.select.Elements;
 import org.jsoup.select.NodeVisitor;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-
-    private ArrayList<Course> courseList = new ArrayList<>();
-
+    
     public static void main(String[] args) throws IOException {
 
         String url = Constants.COURSE_URL;
@@ -35,6 +40,14 @@ public class Main {
         for(Course course : courseList) {
             System.out.println(course.toString());
         }
+
+//        final WebClient webClient = new WebClient(BrowserVersion.CHROME);
+//        final HtmlPage page = webClient.getPage(url);
+//        HtmlElement somePage = page.getElementByName("/Search/Training?IncludeSupersededData=false&amp;TypeAllTrainingComponents=false&amp;TypeTrainingPackages=false&amp;TypeQualifications=true%2Cfalse&amp;TypeAccreditedCourses=false&amp;TypeModule=false&amp;TypeUnitsOfCompetency=false&amp;TypeUnitContextualisations=false&amp;TypeSkillSets=false&amp;nrtSearchSubmit=Search&amp;AdvancedSearch=False&amp;JavaScriptEnabled=true&amp;educationLevel=-99&amp;recognisedby=-99&amp;tableResultsQualification-page=2&amp;setFocus=tableResultsQualification");
+//        somePage.click();
+
+        go();
+        System.out.println("COMPLETE");
     }
 
     private static ArrayList<Course> buildCourseList(Elements paragraphs) {
@@ -67,72 +80,28 @@ public class Main {
         return courseList;
     }
 
-//    private static List<String> getStringsFromUrl(String url, String cssQuery) throws IOException {
-//        Document document = Jsoup.connect(url).get();
-//        Elements elements = StringUtil.isBlank(cssQuery) ?
-//                document.getElementsByClass("body") : document.select(cssQuery);
-//
-//        List<String> strings = new ArrayList<String>();
-//        elements.traverse(new TextNodeExtractor(strings));
-//        return strings;
-//    }
-//
-//    private static class TextNodeExtractor implements NodeVisitor {
-//        private final List<String> strings;
-//        private Course courseUnit;
-//        private ArrayList<Course> courseList = new ArrayList<>();
-//
-//        public TextNodeExtractor(List<String> strings) {
-//            this.strings = strings;
-//        }
-//
-//        @Override
-//        public void head(Node node, int depth) {
-//
-//            if (node instanceof TextNode) {
-//
-//                TextNode textNode = ((TextNode) node);
-//                String text = textNode.text();
-//
-//                if (!StringUtil.isBlank(text)) {
-//                    strings.add(text);
-//                }
-//            }
-//        }
-//
-//        @Override
-//        public void tail(Node node, int depth) {}
-//    }
-//    public static void main(String[] args) {
+    private static void go() throws IOException {
+        /* turn off annoying htmlunit warnings */
+        java.util.logging.Logger.getLogger("com.gargoylesoftware").setLevel(java.util.logging.Level.OFF);
 
-//        Document doc;
-//        try {
-//
-//            // need http protocol
-//            doc = Jsoup.connect("http://training.gov.au/Training/Details/AHCAGB602")
-//                    .userAgent("Mozilla")
-//                    .get();
-//
-//            // get page title
-//            String title = doc.title();
-//            System.out.println("title : " + title);
-//
-//            // get all links
-//            Elements links = doc.select("a[href]");
-//            for (Element link : links) {
-//
-//                // get the value from href attribute
-//                System.out.println("\nlink : " + link.attr("href"));
-//                System.out.println("text : " + link.text());
-//                System.out.println("body : " + link.getElementsByTag("body"));
-//
-//            }
-//
-//            System.out.println("text : " + doc);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
+        HtmlPage nextPage;
+//        String url = "http://media.ethics.ga.gov/search/Campaign/Campaign_Name.aspx?NameID=5751&FilerID=C2009000085&Type=candidate";
 
+        String url = Constants.COURSE_URL;
+
+        final WebClient webclient = new WebClient(BrowserVersion.CHROME);
+        final HtmlPage page = webclient.getPage(url);
+
+        System.out.println("PULLING LINKS:");
+
+        List<HtmlAnchor> articles = (List<HtmlAnchor>) page.getByXPath("//a[@class='t-link']");
+        //List<HtmlAnchor> articles = (List<HtmlAnchor>) page.getByXPath("//div[@class='hform1']/a[@class='lblent
+        // List<HtmlAnchor> articles = (List<HtmlAnchor>) page.getByXPath("//a[@class='lblentrylink']");rylink']");
+
+        for(int x=0; x<articles.size(); x++) {
+            System.out.println("Clicking "+articles.get(x).asText());
+//            nextPage = articles.get(x).click();
+//            System.out.println(nextPage.getBody());
+        }
+    }
 }

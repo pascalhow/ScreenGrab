@@ -2,14 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4fed7673-cdce-49e4-a4f2-933265844fca" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ScreenGrab/com/pascalhow/models/Units$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ScreenGrab/com/pascalhow/models/Units$Builder.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ScreenGrab/com/pascalhow/models/Units.class" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/pascalhow/models/Units.java" afterPath="$PROJECT_DIR$/src/com/pascalhow/models/Course.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ScreenGrab/com/pascalhow/screenGrab/Main.class" afterPath="$PROJECT_DIR$/out/production/ScreenGrab/com/pascalhow/screenGrab/Main.class" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ScreenGrab/com/pascalhow/jsoup/jsoup-1.10.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ScreenGrab/com/pascalhow/screenGrab/Main$TextNodeExtractor.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/pascalhow/jsoup/jsoup-1.10.1.jar" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pascalhow/constants/Constants.java" afterPath="$PROJECT_DIR$/src/com/pascalhow/constants/Constants.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ScreenGrab.iml" afterPath="$PROJECT_DIR$/ScreenGrab.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pascalhow/screenGrab/Main.java" afterPath="$PROJECT_DIR$/src/com/pascalhow/screenGrab/Main.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -32,11 +29,10 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/pascalhow/screenGrab/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-495">
-              <caret line="60" column="93" lean-forward="false" selection-start-line="60" selection-start-column="93" selection-end-line="60" selection-end-column="93" />
+            <state relative-caret-position="68">
+              <caret line="71" column="37" lean-forward="true" selection-start-line="71" selection-start-column="37" selection-end-line="71" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1481237524000" expanded="false" signature="2328:2336" ph="&lt;~&gt;" />
               </folding>
             </state>
           </provider>
@@ -46,7 +42,7 @@
         <entry file="file://$PROJECT_DIR$/src/com/pascalhow/models/Course.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="315">
-              <caret line="35" column="29" lean-forward="true" selection-start-line="35" selection-start-column="29" selection-end-line="35" selection-end-column="29" />
+              <caret line="35" column="29" lean-forward="false" selection-start-line="35" selection-start-column="29" selection-end-line="35" selection-end-column="29" />
               <folding>
                 <element signature="e#525#526#0" expanded="true" />
                 <element signature="e#572#573#0" expanded="true" />
@@ -487,7 +483,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7319149" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.7319149" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295562" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295562" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -543,7 +539,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="17" />
+      <option name="time" value="22" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -558,7 +554,6 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1481237524000" expanded="false" signature="2328:2336" ph="&lt;~&gt;" />
           </folding>
         </state>
       </provider>
@@ -569,7 +564,6 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1481237524000" expanded="false" signature="2328:2336" ph="&lt;~&gt;" />
           </folding>
         </state>
       </provider>
@@ -643,7 +637,7 @@
     <entry file="file://$PROJECT_DIR$/src/com/pascalhow/models/Course.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
-          <caret line="35" column="29" lean-forward="true" selection-start-line="35" selection-start-column="29" selection-end-line="35" selection-end-column="29" />
+          <caret line="35" column="29" lean-forward="false" selection-start-line="35" selection-start-column="29" selection-end-line="35" selection-end-column="29" />
           <folding>
             <element signature="e#525#526#0" expanded="true" />
             <element signature="e#572#573#0" expanded="true" />
@@ -664,11 +658,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/pascalhow/screenGrab/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-495">
-          <caret line="60" column="93" lean-forward="false" selection-start-line="60" selection-start-column="93" selection-end-line="60" selection-end-column="93" />
+        <state relative-caret-position="68">
+          <caret line="71" column="37" lean-forward="true" selection-start-line="71" selection-start-column="37" selection-end-line="71" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1481237524000" expanded="false" signature="2328:2336" ph="&lt;~&gt;" />
           </folding>
         </state>
       </provider>

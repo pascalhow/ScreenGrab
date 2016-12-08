@@ -2,7 +2,7 @@ package com.pascalhow.screenGrab;
 
 
 import com.pascalhow.constants.Constants;
-import com.pascalhow.models.Units;
+import com.pascalhow.models.Course;
 import org.jsoup.Jsoup;
 import org.jsoup.helper.StringUtil;
 import org.jsoup.nodes.Document;
@@ -18,10 +18,11 @@ import java.util.List;
 
 public class Main {
 
-    private ArrayList<Units> unitList = new ArrayList<>();
+    private ArrayList<Course> courseList = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
-        String url = Constants.URL;
+
+        String url = Constants.COURSE_URL;
 
         Document doc = Jsoup.connect(url)
                 .userAgent("Mozilla")
@@ -29,27 +30,47 @@ public class Main {
 
         Elements paragraphs = doc.select("td");
 
-        for (Element p : paragraphs) {
-            if ((!p.text().contains("Current")) && (!p.text().contains("Refresh information"))) {
+        ArrayList<Course> courseList = buildCourseList(paragraphs);
 
-                Units unit = new Units.Builder()
-                        .setCode(p.text().substring(0, p.text().indexOf(" ")))
-                        .setTitle("")
-                        .build();
-
-                System.out.println("----- start -----");
-                System.out.println(unit.getCode());
-                System.out.println(p.text());
-                System.out.println(p.ownText());
-                System.out.println("----- end -----\n");
-            }
+        for(Course course : courseList) {
+            System.out.println(course.toString());
         }
     }
-//
+
+    private static ArrayList<Course> buildCourseList(Elements paragraphs) {
+
+        String code = "";
+        String title;
+
+        ArrayList<Course> courseList = new ArrayList<>();
+
+        for (Element p : paragraphs) {
+            if (!(p.text().contains("Current") || p.text().contains("Refresh information"))) {
+
+                //  If p.ownText() is empty, it means we are reading the course code
+                if((p.ownText().isEmpty()) && (p.text().length() >= 8)) {
+                    code = p.text().substring(0, 8);
+                } else {
+                    title = p.ownText();
+
+                    Course course = new Course.Builder()
+                            .setCode(code)
+                            .setTitle(title)
+                            .build();
+
+                    //  We now have both code and title for a given course so add to the list
+                    courseList.add(course);
+                }
+            }
+        }
+
+        return courseList;
+    }
+
 //    private static List<String> getStringsFromUrl(String url, String cssQuery) throws IOException {
 //        Document document = Jsoup.connect(url).get();
 //        Elements elements = StringUtil.isBlank(cssQuery) ?
-//                document.getElementsByTag("body") : document.select(cssQuery);
+//                document.getElementsByClass("body") : document.select(cssQuery);
 //
 //        List<String> strings = new ArrayList<String>();
 //        elements.traverse(new TextNodeExtractor(strings));
@@ -58,8 +79,8 @@ public class Main {
 //
 //    private static class TextNodeExtractor implements NodeVisitor {
 //        private final List<String> strings;
-//        private Units courseUnit;
-//        private ArrayList<Units> unitList = new ArrayList<>();
+//        private Course courseUnit;
+//        private ArrayList<Course> courseList = new ArrayList<>();
 //
 //        public TextNodeExtractor(List<String> strings) {
 //            this.strings = strings;
@@ -68,32 +89,13 @@ public class Main {
 //        @Override
 //        public void head(Node node, int depth) {
 //
-//            String code = "";
-//            String title = "";
-//
 //            if (node instanceof TextNode) {
 //
-//
 //                TextNode textNode = ((TextNode) node);
-
-//                if (depth == 13) {
-//                    code = textNode.text();
-//                }
+//                String text = textNode.text();
 //
-//                if(depth == 14) {
-//                    title = textNode.text();
-//                }
-//                unitList.add(new Units.Builder()
-//                        .setCode(code)
-//                        .setTitle(title)
-//                        .build());
-//
-//                if (depth == 14) {
-//                    String text = textNode.text();
-//
-//                    if (!StringUtil.isBlank(text)) {
-//                        strings.add(text);
-//                    }
+//                if (!StringUtil.isBlank(text)) {
+//                    strings.add(text);
 //                }
 //            }
 //        }

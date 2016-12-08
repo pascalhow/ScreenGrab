@@ -3,7 +3,7 @@ package com.pascalhow.models;
 /**
  * Created by pascal on 07/12/2016.
  */
-public class Units {
+public class Course {
 
     private final String code;
     private final String title;
@@ -23,12 +23,12 @@ public class Units {
             return this;
         }
 
-        public Units build() {
-            return new Units(this);
+        public Course build() {
+            return new Course(this);
         }
     }
 
-    private Units(Builder builder) {
+    private Course(Builder builder) {
         this.code = builder.code;
         this.title = builder.title;
     }
@@ -43,7 +43,7 @@ public class Units {
 
     @Override
     public String toString() {
-        String unitsToString = "----- Unit -----\n";
+        String unitsToString = "----- Course -----\n";
         unitsToString += "Code: " + this.code + "\n";
         unitsToString += "Title: " + this.title + "\n";
 

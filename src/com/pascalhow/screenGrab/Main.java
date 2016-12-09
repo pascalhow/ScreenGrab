@@ -93,13 +93,14 @@ public class Main {
         final HtmlPage page = webclient.getPage(url);
 
         System.out.println("PULLING LINKS:");
-
         List<HtmlAnchor> articles = (List<HtmlAnchor>) page.getByXPath("//a[@class='t-link']");
         //List<HtmlAnchor> articles = (List<HtmlAnchor>) page.getByXPath("//div[@class='hform1']/a[@class='lblent
         // List<HtmlAnchor> articles = (List<HtmlAnchor>) page.getByXPath("//a[@class='lblentrylink']");rylink']");
 
         for(int x=0; x<articles.size(); x++) {
-            System.out.println("Clicking "+articles.get(x).asText());
+            if(articles.get(x).asText().contains("Navigate to page")) {
+                System.out.println("Clicking " + articles.get(x).asText());
+            }
 //            nextPage = articles.get(x).click();
 //            System.out.println(nextPage.getBody());
         }

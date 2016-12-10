@@ -1,6 +1,7 @@
 package com.pascalhow.screenGrab;
 
 
+import com.oracle.tools.packager.Log;
 import com.pascalhow.constants.Constants;
 import com.pascalhow.models.Course;
 import org.jsoup.Jsoup;
@@ -24,17 +25,28 @@ public class Main {
 
         String url = Constants.COURSE_URL;
 
-        Document doc = Jsoup.connect(url)
-                .userAgent("Mozilla")
-                .get();
+        scanPage(url);
+    }
 
-        Elements paragraphs = doc.select("td");
+    private static void scanPage(String url) {
+        try {
+            Document doc = Jsoup.connect(url)
+                    .userAgent("Chrome")
+                    .get();
 
-        ArrayList<Course> courseList = buildCourseList(paragraphs);
+            // only get from the resultant table, with ID resultsBodyQualification, and in the body element, ignore header and footer
+            Elements paragraphs = doc.select("#resultsBodyQualification tbody td:first-child");
 
-        for(Course course : courseList) {
-            System.out.println(course.toString());
+            ArrayList<Course> courseList = buildCourseList(paragraphs);
+
+            for(Course course : courseList) {
+                System.out.println(course.toString());
+            }
         }
+        catch(IOException error) {
+            Log.debug("failed to scan page");
+        }
+
     }
 
     private static ArrayList<Course> buildCourseList(Elements paragraphs) {

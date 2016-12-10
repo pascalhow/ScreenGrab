@@ -46,7 +46,26 @@ public class Main {
         catch(IOException error) {
             Log.debug("failed to scan page");
         }
+    }
 
+    private static void scanQualificationPage(String url) {
+        try {
+            Document doc = Jsoup.connect(url)
+                    .userAgent("Chrome")
+                    .get();
+
+            // only get from the resultant table, with ID resultsBodyQualification, and in the body element, ignore header and footer
+            Elements paragraphs = doc.select("#tableUnits tbody tr");
+
+            ArrayList<Course> courseList = buildCourseList(paragraphs);
+
+            for(Course course : courseList) {
+                System.out.println(course.toString());
+            }
+        }
+        catch(IOException error) {
+            Log.debug("failed to scan page");
+        }
     }
 
     private static ArrayList<Course> buildCourseList(Elements rows) {

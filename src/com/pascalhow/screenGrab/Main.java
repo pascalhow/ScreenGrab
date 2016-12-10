@@ -35,7 +35,7 @@ public class Main {
                     .get();
 
             // only get from the resultant table, with ID resultsBodyQualification, and in the body element, ignore header and footer
-            Elements paragraphs = doc.select("#resultsBodyQualification tbody td:first-child");
+            Elements paragraphs = doc.select("#resultsBodyQualification tbody tr");
 
             ArrayList<Course> courseList = buildCourseList(paragraphs);
 
@@ -49,31 +49,26 @@ public class Main {
 
     }
 
-    private static ArrayList<Course> buildCourseList(Elements paragraphs) {
-
-        String code = "";
-        String title;
+    private static ArrayList<Course> buildCourseList(Elements rows) {
 
         ArrayList<Course> courseList = new ArrayList<>();
 
-        for (Element p : paragraphs) {
-            if (!(p.text().contains("Current") || p.text().contains("Refresh information"))) {
+        for (Element r : rows) {
+            Element firstCol = r.child(0);
+            Element secondCol = r.child(1);
+            String code = firstCol.child(0).ownText();
+            String link = firstCol.child(0).attr("href").toString();
+            String title = secondCol.ownText();
 
-                //  If p.ownText() is empty, it means we are reading the course code
-                if((p.ownText().isEmpty()) && (p.text().length() >= 8)) {
-                    code = p.text().substring(0, 8);
-                } else {
-                    title = p.ownText();
+            Course course = new Course.Builder()
+                    .setCode(code)
+                    .setTitle(title)
+                    .setLink(link)
+                    .build();
 
-                    Course course = new Course.Builder()
-                            .setCode(code)
-                            .setTitle(title)
-                            .build();
+            //  We now have both code and title for a given course so add to the list
+            courseList.add(course);
 
-                    //  We now have both code and title for a given course so add to the list
-                    courseList.add(course);
-                }
-            }
         }
 
         return courseList;

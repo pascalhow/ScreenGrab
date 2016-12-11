@@ -2,26 +2,22 @@ package com.pascalhow.models;
 
 import com.pascalhow.constants.Constants;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 /**
  * Created by lisa on 11/12/2016.
  */
 public class PerformanceCriteria {
 
     private final ArrayList<criteria> criterias;
-    private final Array performance;
 
     public static class Builder {
 
-        private Array element;
-        private Array performance;
+        private ArrayList<criteria> criterias;
 
-        public PerformanceCriteria.Builder setElements(Array element) {
-            this.element = element;
-            return this;
-        }
-
-        public PerformanceCriteria.Builder setPerformances(Array performance) {
-            this.performance = performance;
+        public PerformanceCriteria.Builder setCriterias(ArrayList<criteria> criteria) {
+            this.criterias = criteria;
             return this;
         }
 
@@ -31,21 +27,12 @@ public class PerformanceCriteria {
     }
 
     private PerformanceCriteria(PerformanceCriteria.Builder builder) {
-        this.element = builder.element;
-        this.performance = builder.performance;
-    }
-
-    public Array getElements() {
-        return this.element;
-    }
-
-    public Array getPerformances() {
-        return this.performance;
+        this.criterias = builder.criterias;
     }
 
     public class criteria {
         private String element;
-
+        private Array performances;
     }
 
     @Override

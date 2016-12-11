@@ -1,5 +1,7 @@
 package com.pascalhow.models;
 
+import com.pascalhow.constants.Constants;
+
 /**
  * Created by pascal on 07/12/2016.
  */
@@ -47,6 +49,12 @@ public class Course {
 
     public String getTitle() {
         return this.title;
+    }
+
+    public String getLink() {
+        // The url stored is without the base url, http:training.gov needs to be prepend
+        // THe links are usually /training/details/....
+        return Constants.BASE_URL + this.link;
     }
 
     @Override

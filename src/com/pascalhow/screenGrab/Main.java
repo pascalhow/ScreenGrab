@@ -5,17 +5,12 @@ import com.oracle.tools.packager.Log;
 import com.pascalhow.constants.Constants;
 import com.pascalhow.models.Course;
 import org.jsoup.Jsoup;
-import org.jsoup.helper.StringUtil;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.nodes.Node;
-import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
-import org.jsoup.select.NodeVisitor;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Main {
 
@@ -25,46 +20,32 @@ public class Main {
 
         String url = Constants.COURSE_URL;
 
-        scanPage(url);
+        ArrayList<Course> qualificationList = scanPageForCourses(url, "#resultsBodyQualification");
+
+        for(Course course : qualificationList) {
+            ArrayList<Course> unitList = scanPageForCourses(course.getLink(),"#tableUnits");
+            for(Course unit : unitList) {
+                System.out.println(unit.toString());
+            }
+        }
     }
 
-    private static void scanPage(String url) {
+    private static ArrayList<Course> scanPageForCourses(String url, String table) {
         try {
             Document doc = Jsoup.connect(url)
                     .userAgent("Chrome")
                     .get();
 
             // only get from the resultant table, with ID resultsBodyQualification, and in the body element, ignore header and footer
-            Elements paragraphs = doc.select("#resultsBodyQualification tbody tr");
+            Elements paragraphs = doc.select(table + " tbody tr");
 
             ArrayList<Course> courseList = buildCourseList(paragraphs);
 
-            for(Course course : courseList) {
-                System.out.println(course.toString());
-            }
+            return courseList;
         }
         catch(IOException error) {
             Log.debug("failed to scan page");
-        }
-    }
-
-    private static void scanQualificationPage(String url) {
-        try {
-            Document doc = Jsoup.connect(url)
-                    .userAgent("Chrome")
-                    .get();
-
-            // only get from the resultant table, with ID resultsBodyQualification, and in the body element, ignore header and footer
-            Elements paragraphs = doc.select("#tableUnits tbody tr");
-
-            ArrayList<Course> courseList = buildCourseList(paragraphs);
-
-            for(Course course : courseList) {
-                System.out.println(course.toString());
-            }
-        }
-        catch(IOException error) {
-            Log.debug("failed to scan page");
+            return new ArrayList<Course>();
         }
     }
 

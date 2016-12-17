@@ -1,6 +1,6 @@
 package com.pascalhow.models;
 
-import com.pascalhow.constants.Constants;
+import com.pascalhow.models.Criteria;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -10,14 +10,14 @@ import java.util.ArrayList;
  */
 public class PerformanceCriteria {
 
-    private final ArrayList<criteria> criterias;
+    private final ArrayList<Criteria> criterias;
 
     public static class Builder {
 
-        private ArrayList<criteria> criterias;
+        private ArrayList<Criteria> criterias = new ArrayList<>();
 
-        public PerformanceCriteria.Builder setCriterias(ArrayList<criteria> criteria) {
-            this.criterias = criteria;
+        public PerformanceCriteria.Builder addCriteria(Criteria criteria) {
+            this.criterias.add(criteria);
             return this;
         }
 
@@ -30,15 +30,13 @@ public class PerformanceCriteria {
         this.criterias = builder.criterias;
     }
 
-    public class criteria {
-        private String element;
-        private Array performances;
-    }
-
     @Override
     public String toString() {
         String unitsToString = "----- Performance criteria -----\n";
-
+        for (Criteria crit : criterias) {
+            unitsToString += crit.getElement();
+            unitsToString +=  "\n";
+        }
         return unitsToString;
     }
 }
